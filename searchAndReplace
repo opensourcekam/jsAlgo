@@ -1,0 +1,63 @@
+/*Perform a search and replace on the sentence using the arguments provided and return the new sentence.
+
+First argument is the sentence to perform the search and replace on.
+
+Second argument is the word that you will be replacing (before).
+
+Third argument is what you will be replacing the second argument with (after).
+
+NOTE: Preserve the case of the original word when you are replacing it. For example if you mean to replace the word 'Book' with the word 'dog', it should be replaced as 'Dog'
+
+Remember to use RSAP if you get stuck. Try to pair program. Write your own code.
+
+Here are some helpful links:
+
+Array.splice()
+String.replace()
+Array.join()
+*/
+
+function replace(str, before, after) {
+
+  // split string to array and find index of before
+  var arr = str.split(" ");
+   console.log(arr); //[ "A", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog" ]
+  // loop throught array looking for idx of var before
+  // check if before is uppercase
+  var upperRegx = (/[A-Z]/);
+  if (upperRegx.test(before[0])){
+    // if true capitalize after
+    after = after[0].toUpperCase() + after.substr(1, after.length);
+    before = before.toLowerCase();
+    console.log(after);
+    console.log(before);
+    str = str.replace(RegExp(before, "gi"), after);
+    arr = str.split(" ");
+    console.log(arr);
+  }
+   
+   
+  // if befor is uppercase make after[0] uppercase
+  for(var i = 0; i < arr.length; i++)
+  {
+    console.log(arr[i].toLowerCase());
+     // Using to .ignore case did not work what so ever, but using .toLowerCase() is perfect :) 
+    if(arr[i] == before.toLowerCase())
+    {
+      // check if loop returns true
+      console.log("The idxOf " + arr.indexOf(arr[i]) + " is the word " + before);
+      // splice and replace with new after
+      // check case of the word to be replaced
+      console.log("Is it upper cased? T/F " + arr[i][0] === arr[i][0].toUpperCase());
+      arr.splice(arr.indexOf(arr[i]), 1, after);
+      //console.log(arr);
+    }
+  }
+  str = arr.join(' ');
+  // check str for join
+  console.log(str);
+  return str; 
+}
+
+replace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
+
